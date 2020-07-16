@@ -1,6 +1,6 @@
 ## Todo App
 
-This is an iOS todo app with Firebase as a backend
+This is an iOS todo app with Firebase as a backend. This is used in conjunction with another [React web app](https://github.com/muhdmirzamz/TodoApp) I'm working on. Both of these projects connect to the same Firebase database.
 
 ### Changelog
 
