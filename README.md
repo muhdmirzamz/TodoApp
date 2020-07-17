@@ -4,5 +4,8 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 ### Changelog
 
+17 July:
+- Connected project to Firebase
+
 16 July:
 - First commit
