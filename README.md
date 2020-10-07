@@ -9,3 +9,7 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 16 July:
 - First commit
+
+### Technologies used
+- Swift
+- Firebase
