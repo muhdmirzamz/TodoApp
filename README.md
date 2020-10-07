@@ -13,3 +13,4 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 ### Technologies used
 - Swift
 - Firebase
+- Cocoapods
