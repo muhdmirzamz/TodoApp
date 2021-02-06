@@ -15,7 +15,7 @@
 		AA7AE74F24BC90C600B1C4EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA7AE74D24BC90C600B1C4EB /* LaunchScreen.storyboard */; };
 		AA7AE75724BC915E00B1C4EB /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7AE75624BC915E00B1C4EB /* TableViewController.swift */; };
 		AA7AE75924BC938200B1C4EB /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7AE75824BC938200B1C4EB /* InputViewController.swift */; };
-		AAA7820A24C2011B001ACDE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAA7820924C2011B001ACDE9 /* GoogleService-Info.plist */; };
+		AAE9A33725CE80B700254693 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAE9A33625CE80B700254693 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,7 @@
 		AA7AE75024BC90C600B1C4EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA7AE75624BC915E00B1C4EB /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		AA7AE75824BC938200B1C4EB /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
-		AAA7820924C2011B001ACDE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AAE9A33625CE80B700254693 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +81,8 @@
 				AA7AE74424BC90C500B1C4EB /* SceneDelegate.swift */,
 				AA7AE74824BC90C500B1C4EB /* Main.storyboard */,
 				AA7AE74B24BC90C600B1C4EB /* Assets.xcassets */,
+				AAE9A33625CE80B700254693 /* GoogleService-Info.plist */,
 				AA7AE74D24BC90C600B1C4EB /* LaunchScreen.storyboard */,
-				AAA7820924C2011B001ACDE9 /* GoogleService-Info.plist */,
 				AA7AE75024BC90C600B1C4EB /* Info.plist */,
 			);
 			path = TodoApp;
@@ -126,7 +126,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Muhd Mirza";
 				TargetAttributes = {
 					AA7AE73E24BC90C500B1C4EB = {
@@ -158,7 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA7AE74F24BC90C600B1C4EB /* LaunchScreen.storyboard in Resources */,
-				AAA7820A24C2011B001ACDE9 /* GoogleService-Info.plist in Resources */,
+				AAE9A33725CE80B700254693 /* GoogleService-Info.plist in Resources */,
 				AA7AE74C24BC90C600B1C4EB /* Assets.xcassets in Resources */,
 				AA7AE74A24BC90C500B1C4EB /* Main.storyboard in Resources */,
 			);
@@ -268,6 +268,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -328,6 +329,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -364,6 +366,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5Y8ZVY4N62;
 				INFOPLIST_FILE = TodoApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -383,6 +386,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5Y8ZVY4N62;
 				INFOPLIST_FILE = TodoApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

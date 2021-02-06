@@ -14,3 +14,6 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 - Swift
 - Firebase
 - Cocoapods
+
+### INSTALL
+Be sure to run ```pod install``` before anything else.

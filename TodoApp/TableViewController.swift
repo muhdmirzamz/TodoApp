@@ -27,7 +27,7 @@ class TableViewController: UITableViewController, InputViewProtocol {
         
         self.tableView.isEditing = false
         
-        Auth.auth().signIn(withEmail: "test@gmail.com", password: "password") { (result, error) in
+        Auth.auth().signIn(withEmail: "", password: "") { (result, error) in
             if let result = result {
                 print(result.user.uid)
                 print(result.user.email)
