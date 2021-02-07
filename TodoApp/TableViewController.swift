@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class TableViewController: UITableViewController, InputViewProtocol {
     
@@ -26,13 +25,6 @@ class TableViewController: UITableViewController, InputViewProtocol {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         self.tableView.isEditing = false
-        
-        Auth.auth().signIn(withEmail: "", password: "") { (result, error) in
-            if let result = result {
-                print(result.user.uid)
-                print(result.user.email)
-            }
-        }
     }
 
     // MARK: - Table view data source

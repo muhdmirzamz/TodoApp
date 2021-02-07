@@ -4,6 +4,9 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 ### Changelog
 
+7 February 2020:
+- Implemented a Signin page
+
 17 July:
 - Connected project to Firebase
 
