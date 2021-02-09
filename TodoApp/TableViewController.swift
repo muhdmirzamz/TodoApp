@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
 class TableViewController: UITableViewController, InputViewProtocol {
     
-    var itemsArr = ["Hello", "Yo", "Bye"]
+    var itemsArr: [String] = []
     
     @IBOutlet var editButton: UIBarButtonItem!
     @IBOutlet var addButton: UIBarButtonItem!
@@ -25,6 +27,35 @@ class TableViewController: UITableViewController, InputViewProtocol {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         self.tableView.isEditing = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let ref = Database.database().reference()
+        
+        let userID = Auth.auth().currentUser?.uid
+        
+        ref.child(userID!).observe(.value) { (snapshot) in
+            self.itemsArr.removeAll()
+            
+            if let dict = snapshot.value as? NSDictionary {
+                for entry in dict {
+                    print("Key: \(entry.key)")
+                    
+                    if let v = entry.value as? NSDictionary {
+                        guard let value = v.value(forKey: "todoItem") as? String else {
+                            return
+                        }
+                        
+                        print("Value: \(value)")
+                        
+                        self.itemsArr.append(value)
+                    }
+                }
+                
+                self.tableView.reloadData()
+            }
+           
+        }
     }
 
     // MARK: - Table view data source

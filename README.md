@@ -4,7 +4,10 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 ### Changelog
 
-7 February 2020:
+9 February 2021:
+- You are now able to retrieve items and listen for changes
+
+7 February 2021:
 - Implemented a Signin page
 
 17 July:
