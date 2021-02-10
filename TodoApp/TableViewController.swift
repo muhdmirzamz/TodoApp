@@ -33,28 +33,43 @@ class TableViewController: UITableViewController, InputViewProtocol {
         let ref = Database.database().reference()
         
         let userID = Auth.auth().currentUser?.uid
+       
+        ref.child(userID!).observe(.childAdded) { (snapshot) in
+            if let item = snapshot.value as? NSDictionary {
+                print("AN ITEM IS ADDED!!!! ------")
+                
+                guard let itemName = item.value(forKey: "todoItem") as? String else {
+                    return
+                }
+                
+                print(itemName)
+                
+                self.itemsArr.append(itemName)
+                
+                self.tableView.reloadData()
+            }
+        }
         
-        ref.child(userID!).observe(.value) { (snapshot) in
-            self.itemsArr.removeAll()
-            
-            if let dict = snapshot.value as? NSDictionary {
-                for entry in dict {
-                    print("Key: \(entry.key)")
-                    
-                    if let v = entry.value as? NSDictionary {
-                        guard let value = v.value(forKey: "todoItem") as? String else {
-                            return
-                        }
-                        
-                        print("Value: \(value)")
-                        
-                        self.itemsArr.append(value)
-                    }
+        
+        ref.child(userID!).observe(.childRemoved) { (snapshot) in
+            if let item = snapshot.value as? NSDictionary {
+                print("AN ITEM IS REMOVED!!!! ------")
+                
+                guard let itemName = item.value(forKey: "todoItem") as? String else {
+                    return
+                }
+                
+                print(itemName)
+                
+                // can either use filter{} or firstIndexOf
+                // indexOf(at:) is deprecated?
+                // filter the items array and not include the deleted item
+                self.itemsArr = self.itemsArr.filter { (item) -> Bool in
+                    return item != itemName
                 }
                 
                 self.tableView.reloadData()
             }
-           
         }
     }
 

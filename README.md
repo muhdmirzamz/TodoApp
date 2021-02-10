@@ -4,6 +4,9 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 ### Changelog
 
+10 February 2021:
+- Refactored item event listening code to listen for addition and deletion of items
+
 9 February 2021:
 - You are now able to retrieve items and listen for changes
 
