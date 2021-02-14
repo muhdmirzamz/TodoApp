@@ -12,6 +12,14 @@ import FirebaseAuth
 
 class TableViewController: UITableViewController, InputViewProtocol {
     
+    // original idea was to use a dict <String: Any>
+    // to store keys as well as values so as to save a network call
+    // but if you store keys + values locally, it takes up RAM/space?
+    // so better for a network call?
+    
+    // dictionaries do not work well with accessing individual keys during tableview deletion
+    // so perhaps we keep 2 arrays - one for keys and one for values
+    var keysArr: [String] = []
     var itemsArr: [String] = []
     
     @IBOutlet var editButton: UIBarButtonItem!
@@ -22,44 +30,51 @@ class TableViewController: UITableViewController, InputViewProtocol {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        self.tableView.isEditing = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // prevent double insertion to arrays everytime view loads up
+        self.keysArr.removeAll()
+        self.itemsArr.removeAll()
+        
         let ref = Database.database().reference()
         
         let userID = Auth.auth().currentUser?.uid
        
         ref.child(userID!).observe(.childAdded) { (snapshot) in
-            if let item = snapshot.value as? NSDictionary {
+            
+            let key = snapshot.key
+            self.keysArr.append(key)
+            
+            if let item = snapshot.value as? Dictionary<String, Any> {
                 print("AN ITEM IS ADDED!!!! ------")
                 
-                guard let itemName = item.value(forKey: "todoItem") as? String else {
+                // how you access a value using Swift's Dictionary<String, Any>
+                guard let itemName = item["todoItem"] as? String else {
                     return
                 }
                 
-                print(itemName)
-                
                 self.itemsArr.append(itemName)
-                
-                self.tableView.reloadData()
             }
+            
+            self.tableView.reloadData()
         }
         
         
         ref.child(userID!).observe(.childRemoved) { (snapshot) in
-            if let item = snapshot.value as? NSDictionary {
+            
+            let key = snapshot.key
+            
+            self.keysArr = self.keysArr.filter { (item) -> Bool in
+                return item != key
+            }
+            
+            if let item = snapshot.value as? Dictionary<String, Any> {
                 print("AN ITEM IS REMOVED!!!! ------")
                 
-                guard let itemName = item.value(forKey: "todoItem") as? String else {
+                guard let itemName = item["todoItem"] as? String else {
                     return
                 }
-                
-                print(itemName)
                 
                 // can either use filter{} or firstIndexOf
                 // indexOf(at:) is deprecated?
@@ -90,25 +105,38 @@ class TableViewController: UITableViewController, InputViewProtocol {
 
         // Configure the cell...
         cell.textLabel?.text = self.itemsArr[indexPath.row]
+        
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            // remove from database
+            let ref = Database.database().reference()
+            let userID = Auth.auth().currentUser?.uid
+            ref.child(userID!).child(self.keysArr[indexPath.row]).removeValue()
+            
+            
+            
+            // remove from itemsArr
             self.itemsArr.remove(at: indexPath.row)
+            
+            // remove from keysArr
+            self.keysArr.remove(at: indexPath.row)
+
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let obj = self.itemsArr[sourceIndexPath.row]
-        
-        self.itemsArr.remove(at: sourceIndexPath.row)
-        self.itemsArr.insert(obj, at: destinationIndexPath.row)
-        
-        self.tableView.reloadData()
-    }
+//    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        let obj = self.itemsArr[sourceIndexPath.row]
+//
+//        self.itemsArr.remove(at: sourceIndexPath.row)
+//        self.itemsArr.insert(obj, at: destinationIndexPath.row)
+//
+//        self.tableView.reloadData()
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "data" {
@@ -132,8 +160,8 @@ class TableViewController: UITableViewController, InputViewProtocol {
     }
     
     func sendItem(item: String) {
-        self.itemsArr.append(item)
-        
-        self.tableView.reloadData()
+//        self.itemsArr.append(item)
+//
+//        self.tableView.reloadData()
     }
 }

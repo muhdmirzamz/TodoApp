@@ -4,6 +4,11 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 ### Changelog
 
+14 February 2021:
+- You can now delete an item by activating deletion mode in tableview
+- Code restructure: Used 2 arrays for keys and items
+- Fixed: Items do not keep getting inserted into the array on page load
+
 10 February 2021:
 - Refactored item event listening code to listen for addition and deletion of items
 
