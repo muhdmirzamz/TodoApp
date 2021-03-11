@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--List Table View Controller-->
         <scene sceneID="Edq-su-yEh">
             <objects>
-                <tableViewController storyboardIdentifier="TableViewController" id="J5Z-an-aRT" customClass="TableViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TableViewController" id="J5Z-an-aRT" customClass="ListTableViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Buh-c3-8Dc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -35,7 +35,7 @@
                     <navigationItem key="navigationItem" id="f4M-Uo-zDq">
                         <barButtonItem key="leftBarButtonItem" title="Edit" id="8UR-Th-pQF">
                             <connections>
-                                <action selector="editTable" destination="J5Z-an-aRT" id="zJM-uu-9QG"/>
+                                <action selector="editTable" destination="J5Z-an-aRT" id="p1s-w7-Xgu"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Lgu-1C-xdN">
@@ -45,8 +45,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addButton" destination="Lgu-1C-xdN" id="AmN-PL-FPg"/>
-                        <outlet property="editButton" destination="8UR-Th-pQF" id="8T2-w1-GUr"/>
+                        <outlet property="addButton" destination="Lgu-1C-xdN" id="gFx-gX-Aif"/>
+                        <outlet property="editButton" destination="8UR-Th-pQF" id="WvZ-Dy-VAi"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yag-eY-qto" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class TableViewController: UITableViewController, InputViewProtocol {
+class ListTableViewController: UITableViewController {
     
     // original idea was to use a dict <String: Any>
     // to store keys as well as values so as to save a network call
@@ -20,72 +20,121 @@ class TableViewController: UITableViewController, InputViewProtocol {
     // dictionaries do not work well with accessing individual keys during tableview deletion
     // so perhaps we keep 2 arrays - one for keys and one for values
     var keysArr: [String] = []
-    var itemsArr: [String] = []
+    var listArr: [String] = []
     
     @IBOutlet var editButton: UIBarButtonItem!
     @IBOutlet var addButton: UIBarButtonItem!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
         // prevent double insertion to arrays everytime view loads up
+        print("View will appear")
+        
+        
         self.keysArr.removeAll()
-        self.itemsArr.removeAll()
+        self.listArr.removeAll()
+                
         
         let ref = Database.database().reference()
         
         let userID = Auth.auth().currentUser?.uid
        
-        ref.child(userID!).observe(.childAdded) { (snapshot) in
+        
+        
+        ref.child("/lists").child(userID!).observeSingleEvent(of: .value) { (snapshot) in
             
-            let key = snapshot.key
-            self.keysArr.append(key)
-            
-            if let item = snapshot.value as? Dictionary<String, Any> {
-                print("AN ITEM IS ADDED!!!! ------")
+            if let listsDict = snapshot.value as? Dictionary<String, Any> {
                 
-                // how you access a value using Swift's Dictionary<String, Any>
-                guard let itemName = item["todoItem"] as? String else {
-                    return
+                for i in listsDict {
+                    print("key: \(i.key)")
+                    
+                    self.keysArr.append(i.key)
+                    
+                    if let listNameDict = i.value as? Dictionary<String, Any> {
+                        
+                        guard let listName = listNameDict["listName"] as? String else {
+                            return
+                        }
+                        
+                        self.listArr.append(listName)
+                        
+                        print("listName: \(listName)")
+                    }
                 }
-                
-                self.itemsArr.append(itemName)
             }
             
             self.tableView.reloadData()
+            
         }
         
         
-        ref.child(userID!).observe(.childRemoved) { (snapshot) in
-            
-            let key = snapshot.key
-            
-            self.keysArr = self.keysArr.filter { (item) -> Bool in
-                return item != key
-            }
-            
-            if let item = snapshot.value as? Dictionary<String, Any> {
-                print("AN ITEM IS REMOVED!!!! ------")
-                
-                guard let itemName = item["todoItem"] as? String else {
-                    return
-                }
-                
-                // can either use filter{} or firstIndexOf
-                // indexOf(at:) is deprecated?
-                // filter the items array and not include the deleted item
-                self.itemsArr = self.itemsArr.filter { (item) -> Bool in
-                    return item != itemName
-                }
-                
-                self.tableView.reloadData()
-            }
-        }
+        
+        
+        
+        
+//        ref.child("/lists").child(userID!).observe(.childAdded) { (snapshot) in
+//
+//            let key = snapshot.key
+//            self.keysArr.append(key)
+//
+//
+//            if let listNameDict = snapshot.value as? Dictionary<String, Any> {
+//                print("\n\nAN ITEM IS ADDED!!!! ------")
+//
+//                print("K: \(listNameDict)")
+//
+//                // how you access a value using Swift's Dictionary<String, Any>
+//                guard let listName = listNameDict["listName"] as? String else {
+//                    return
+//                }
+//
+//                self.listArr.append(listName)
+//
+//                print("LENGTH====: \(self.listArr.count)")
+//            }
+//
+//            print("Reloading table view")
+//
+////            self.removeAll = false
+//
+//            // reload data when everything is loaded up
+//            self.tableView.reloadData()
+//        }
+        
+//        ref.child(userID!).observe(.childRemoved) { (snapshot) in
+//
+//            let key = snapshot.key
+//
+//            self.keysArr = self.keysArr.filter { (item) -> Bool in
+//                return item != key
+//            }
+//
+//            if let item = snapshot.value as? Dictionary<String, Any> {
+//                print("AN ITEM IS REMOVED!!!! ------")
+//
+//                guard let itemName = item["todoItem"] as? String else {
+//                    return
+//                }
+//
+//                // can either use filter{} or firstIndexOf
+//                // indexOf(at:) is deprecated?
+//                // filter the items array and not include the deleted item
+//                self.itemsArr = self.itemsArr.filter { (item) -> Bool in
+//                    return item != itemName
+//                }
+//
+//                self.tableView.reloadData()
+//            }
+//        }
     }
 
     // MARK: - Table view data source
@@ -97,14 +146,16 @@ class TableViewController: UITableViewController, InputViewProtocol {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.itemsArr.count
+        return self.listArr.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
+        print("List arr length: \(self.listArr.count)")
+        
         // Configure the cell...
-        cell.textLabel?.text = self.itemsArr[indexPath.row]
+        cell.textLabel?.text = self.listArr[indexPath.row]
         
 
         return cell
@@ -120,7 +171,7 @@ class TableViewController: UITableViewController, InputViewProtocol {
             
             
             // remove from itemsArr
-            self.itemsArr.remove(at: indexPath.row)
+            self.listArr.remove(at: indexPath.row)
             
             // remove from keysArr
             self.keysArr.remove(at: indexPath.row)
@@ -141,7 +192,6 @@ class TableViewController: UITableViewController, InputViewProtocol {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "data" {
             let inputVC = segue.destination as? InputViewController
-            inputVC?.delegate = self
         }
     }
     
@@ -157,11 +207,5 @@ class TableViewController: UITableViewController, InputViewProtocol {
             
             self.tableView.isEditing = false
         }
-    }
-    
-    func sendItem(item: String) {
-//        self.itemsArr.append(item)
-//
-//        self.tableView.reloadData()
     }
 }

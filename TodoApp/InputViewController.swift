@@ -8,15 +8,13 @@
 
 import UIKit
 
-protocol InputViewProtocol {
-    func sendItem(item: String)
-}
+import FirebaseDatabase
+import FirebaseAuth
+
 
 class InputViewController: UIViewController {
 
     @IBOutlet var textfield: UITextField!
-    
-    var delegate: InputViewProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +24,18 @@ class InputViewController: UIViewController {
     
     @IBAction func addItem() {
         if let text = self.textfield.text {
-            self.delegate?.sendItem(item: text)
+            
+            let ref = Database.database().reference()
+            
+            guard let userID = Auth.auth().currentUser?.uid else {
+                return
+            }
+            
+            guard let key = ref.child("/lists/\(userID)").childByAutoId().key else {
+                return
+            }
+            
+            ref.child("/lists/\(userID)/\(key)").setValue(["listName": text])
             
             self.navigationController?.popViewController(animated: true)
         }

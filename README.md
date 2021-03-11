@@ -4,6 +4,11 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 ### Changelog
 
+12 March 2021:
+- You can get lists
+- You can create new lists
+- Refactored code according to database restructure
+
 14 February 2021:
 - You can now delete an item by activating deletion mode in tableview
 - Code restructure: Used 2 arrays for keys and items
