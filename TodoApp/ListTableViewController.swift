@@ -11,11 +11,8 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class ListTableViewController: UITableViewController {
-    
-    // original idea was to use a dict <String: Any>
-    // to store keys as well as values so as to save a network call
-    // but if you store keys + values locally, it takes up RAM/space?
-    // so better for a network call?
+
+    var uponSuccessfulSignup = false
     
     // dictionaries do not work well with accessing individual keys during tableview deletion
     // so perhaps we keep 2 arrays - one for keys and one for values
@@ -32,6 +29,17 @@ class ListTableViewController: UITableViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+        
+        if (uponSuccessfulSignup) {
+            let alert = UIAlertController.init(title: "Welcome!", message: "Let's start", preferredStyle: .alert)
+            let okAction = UIAlertAction.init(title: "OK", style: .default, handler: nil)
+            
+            alert.addAction(okAction)
+            
+            DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     
     }
     
