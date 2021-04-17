@@ -12,7 +12,7 @@ import FirebaseDatabase
 import FirebaseAuth
 
 
-class InputViewController: UIViewController {
+class InputListViewController: UIViewController {
 
     @IBOutlet var textfield: UITextField!
     

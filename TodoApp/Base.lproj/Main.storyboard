@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--List Table View Controller-->
+        <!--Lists-->
         <scene sceneID="Edq-su-yEh">
             <objects>
                 <tableViewController storyboardIdentifier="TableViewController" id="J5Z-an-aRT" customClass="ListTableViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,13 +18,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="eU7-4d-Vpa">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" id="eU7-4d-Vpa">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eU7-4d-Vpa" id="sBw-K6-snz">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="zdn-3F-xid" kind="show" identifier="TodoSegue" id="OZO-ZJ-r4z"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -32,7 +35,7 @@
                             <outlet property="delegate" destination="J5Z-an-aRT" id="elf-Gw-Z3C"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="f4M-Uo-zDq">
+                    <navigationItem key="navigationItem" title="Lists" id="f4M-Uo-zDq">
                         <barButtonItem key="leftBarButtonItem" title="Edit" id="8UR-Th-pQF">
                             <connections>
                                 <action selector="editTable" destination="J5Z-an-aRT" id="p1s-w7-Xgu"/>
@@ -53,10 +56,10 @@
             </objects>
             <point key="canvasLocation" x="1013.0434782608696" y="130.58035714285714"/>
         </scene>
-        <!--Input View Controller-->
+        <!--Input List View Controller-->
         <scene sceneID="Yme-PS-ZPt">
             <objects>
-                <viewController id="a55-kG-6Eo" customClass="InputViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="a55-kG-6Eo" customClass="InputListViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RBq-qp-sZ9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -91,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KbD-jv-ilg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1979.7101449275365" y="130.58035714285714"/>
+            <point key="canvasLocation" x="1793" y="-742"/>
         </scene>
         <!--Signin View Controller-->
         <scene sceneID="yrV-yI-Djb">
@@ -146,7 +149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3eX-OE-tsk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1175.3623188405797" y="159.375"/>
+            <point key="canvasLocation" x="-878" y="131"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3D5-Fd-TK9">
@@ -165,6 +168,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Phw-4o-XOX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="102.89855072463769" y="130.58035714285714"/>
+        </scene>
+        <!--Todo Table View Controller-->
+        <scene sceneID="PhG-ZQ-o4e">
+            <objects>
+                <tableViewController id="zdn-3F-xid" customClass="TodoTableViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="U2z-gT-Eu0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="QZO-Ik-Fmd">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QZO-Ik-Fmd" id="gdn-89-13L">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zdn-3F-xid" id="aYA-M8-sKQ"/>
+                            <outlet property="delegate" destination="zdn-3F-xid" id="7WL-gD-6mf"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="fuh-7H-c5e"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cxe-N6-bZc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1793" y="131"/>
         </scene>
     </scenes>
     <resources>

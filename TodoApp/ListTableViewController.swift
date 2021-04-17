@@ -163,11 +163,11 @@ class ListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            
             // remove from database
             let ref = Database.database().reference()
             let userID = Auth.auth().currentUser?.uid
-            ref.child(userID!).child(self.keysArr[indexPath.row]).removeValue()
-            
+            ref.child("/lists").child(userID!).child(self.keysArr[indexPath.row]).removeValue()
             
             
             // remove from itemsArr
@@ -189,9 +189,17 @@ class ListTableViewController: UITableViewController {
 //        self.tableView.reloadData()
 //    }
     
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "data" {
-            let inputVC = segue.destination as? InputViewController
+        if segue.identifier == "TodoSegue" {
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+
+                print("passed var: \(self.listArr[indexPath.row])")
+                
+                let todoTableVC = segue.destination as? TodoTableViewController
+                todoTableVC?.navigationItem.title = self.listArr[indexPath.row]
+            }
         }
     }
     

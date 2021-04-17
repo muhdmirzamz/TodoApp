@@ -9,13 +9,15 @@
 /* Begin PBXBuildFile section */
 		5C786B1CBA0445A32C7F1E0C /* Pods_TodoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35195FCADD71171EAA411CB2 /* Pods_TodoApp.framework */; };
 		AA345B3B25D0273F008E0D6E /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA345B3A25D0273F008E0D6E /* SigninViewController.swift */; };
+		AA66B0202618992B004EAC48 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA66B01F2618992B004EAC48 /* GoogleService-Info.plist */; };
+		AA66B02C2618A4AD004EAC48 /* TodoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA66B02B2618A4AD004EAC48 /* TodoTableViewController.swift */; };
 		AA7AE74324BC90C500B1C4EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7AE74224BC90C500B1C4EB /* AppDelegate.swift */; };
 		AA7AE74524BC90C500B1C4EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7AE74424BC90C500B1C4EB /* SceneDelegate.swift */; };
 		AA7AE74A24BC90C500B1C4EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA7AE74824BC90C500B1C4EB /* Main.storyboard */; };
 		AA7AE74C24BC90C600B1C4EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA7AE74B24BC90C600B1C4EB /* Assets.xcassets */; };
 		AA7AE74F24BC90C600B1C4EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA7AE74D24BC90C600B1C4EB /* LaunchScreen.storyboard */; };
 		AA7AE75724BC915E00B1C4EB /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7AE75624BC915E00B1C4EB /* ListTableViewController.swift */; };
-		AA7AE75924BC938200B1C4EB /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7AE75824BC938200B1C4EB /* InputViewController.swift */; };
+		AA7AE75924BC938200B1C4EB /* InputListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7AE75824BC938200B1C4EB /* InputListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		35195FCADD71171EAA411CB2 /* Pods_TodoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TodoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		742C26EC0A7198039787E212 /* Pods-TodoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TodoApp.release.xcconfig"; path = "Target Support Files/Pods-TodoApp/Pods-TodoApp.release.xcconfig"; sourceTree = "<group>"; };
 		AA345B3A25D0273F008E0D6E /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
+		AA66B01F2618992B004EAC48 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AA66B02B2618A4AD004EAC48 /* TodoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewController.swift; sourceTree = "<group>"; };
 		AA7AE73F24BC90C500B1C4EB /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA7AE74224BC90C500B1C4EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA7AE74424BC90C500B1C4EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,7 +35,7 @@
 		AA7AE74E24BC90C600B1C4EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA7AE75024BC90C600B1C4EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA7AE75624BC915E00B1C4EB /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
-		AA7AE75824BC938200B1C4EB /* InputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
+		AA7AE75824BC938200B1C4EB /* InputListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,13 +80,15 @@
 			isa = PBXGroup;
 			children = (
 				AA7AE75624BC915E00B1C4EB /* ListTableViewController.swift */,
-				AA7AE75824BC938200B1C4EB /* InputViewController.swift */,
+				AA7AE75824BC938200B1C4EB /* InputListViewController.swift */,
 				AA7AE74224BC90C500B1C4EB /* AppDelegate.swift */,
+				AA66B02B2618A4AD004EAC48 /* TodoTableViewController.swift */,
 				AA7AE74424BC90C500B1C4EB /* SceneDelegate.swift */,
 				AA7AE74824BC90C500B1C4EB /* Main.storyboard */,
 				AA345B3A25D0273F008E0D6E /* SigninViewController.swift */,
 				AA7AE74B24BC90C600B1C4EB /* Assets.xcassets */,
 				AA7AE74D24BC90C600B1C4EB /* LaunchScreen.storyboard */,
+				AA66B01F2618992B004EAC48 /* GoogleService-Info.plist */,
 				AA7AE75024BC90C600B1C4EB /* Info.plist */,
 			);
 			path = TodoApp;
@@ -158,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA7AE74F24BC90C600B1C4EB /* LaunchScreen.storyboard in Resources */,
+				AA66B0202618992B004EAC48 /* GoogleService-Info.plist in Resources */,
 				AA7AE74C24BC90C600B1C4EB /* Assets.xcassets in Resources */,
 				AA7AE74A24BC90C500B1C4EB /* Main.storyboard in Resources */,
 			);
@@ -213,10 +220,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA7AE74324BC90C500B1C4EB /* AppDelegate.swift in Sources */,
+				AA66B02C2618A4AD004EAC48 /* TodoTableViewController.swift in Sources */,
 				AA345B3B25D0273F008E0D6E /* SigninViewController.swift in Sources */,
 				AA7AE75724BC915E00B1C4EB /* ListTableViewController.swift in Sources */,
 				AA7AE74524BC90C500B1C4EB /* SceneDelegate.swift in Sources */,
-				AA7AE75924BC938200B1C4EB /* InputViewController.swift in Sources */,
+				AA7AE75924BC938200B1C4EB /* InputListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
