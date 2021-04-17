@@ -4,6 +4,9 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 ### Changelog
 
+17 April 2021:
+- List title now show up in Navigation bar title when viewing list items
+
 12 March 2021:
 - You can get lists
 - You can create new lists
