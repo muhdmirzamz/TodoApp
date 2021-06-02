@@ -14,10 +14,7 @@ class ListTableViewController: UITableViewController {
 
     var uponSuccessfulSignup = false
     
-    // dictionaries do not work well with accessing individual keys during tableview deletion
-    // so perhaps we keep 2 arrays - one for keys and one for values
-    var keysArr: [String] = []
-    var listArr: [String] = []
+    var listArray: [List] = []
     
     @IBOutlet var editButton: UIBarButtonItem!
     @IBOutlet var addButton: UIBarButtonItem!
@@ -47,9 +44,8 @@ class ListTableViewController: UITableViewController {
         // prevent double insertion to arrays everytime view loads up
         print("View will appear")
         
-        
-        self.keysArr.removeAll()
-        self.listArr.removeAll()
+
+        self.listArray.removeAll()
                 
         
         let ref = Database.database().reference()
@@ -63,9 +59,11 @@ class ListTableViewController: UITableViewController {
             if let listsDict = snapshot.value as? Dictionary<String, Any> {
                 
                 for i in listsDict {
-                    print("key: \(i.key)")
                     
-                    self.keysArr.append(i.key)
+                    let list = List()
+                    
+                    list.key = i.key
+                    
                     
                     if let listNameDict = i.value as? Dictionary<String, Any> {
                         
@@ -73,76 +71,25 @@ class ListTableViewController: UITableViewController {
                             return
                         }
                         
-                        self.listArr.append(listName)
+                        list.listName = listName
                         
-                        print("listName: \(listName)")
+                        guard let timestamp = listNameDict["timestamp"] as? String else {
+                            return
+                        }
+                        
+                        list.timestamp = timestamp
+                        
+                        self.listArray.append(list)
                     }
                 }
             }
             
+            self.listArray.sort(by: {$0.timestamp! > $1.timestamp!})
+            
             self.tableView.reloadData()
             
         }
-        
-        
-        
-        
-        
-        
-//        ref.child("/lists").child(userID!).observe(.childAdded) { (snapshot) in
-//
-//            let key = snapshot.key
-//            self.keysArr.append(key)
-//
-//
-//            if let listNameDict = snapshot.value as? Dictionary<String, Any> {
-//                print("\n\nAN ITEM IS ADDED!!!! ------")
-//
-//                print("K: \(listNameDict)")
-//
-//                // how you access a value using Swift's Dictionary<String, Any>
-//                guard let listName = listNameDict["listName"] as? String else {
-//                    return
-//                }
-//
-//                self.listArr.append(listName)
-//
-//                print("LENGTH====: \(self.listArr.count)")
-//            }
-//
-//            print("Reloading table view")
-//
-////            self.removeAll = false
-//
-//            // reload data when everything is loaded up
-//            self.tableView.reloadData()
-//        }
-        
-//        ref.child(userID!).observe(.childRemoved) { (snapshot) in
-//
-//            let key = snapshot.key
-//
-//            self.keysArr = self.keysArr.filter { (item) -> Bool in
-//                return item != key
-//            }
-//
-//            if let item = snapshot.value as? Dictionary<String, Any> {
-//                print("AN ITEM IS REMOVED!!!! ------")
-//
-//                guard let itemName = item["todoItem"] as? String else {
-//                    return
-//                }
-//
-//                // can either use filter{} or firstIndexOf
-//                // indexOf(at:) is deprecated?
-//                // filter the items array and not include the deleted item
-//                self.itemsArr = self.itemsArr.filter { (item) -> Bool in
-//                    return item != itemName
-//                }
-//
-//                self.tableView.reloadData()
-//            }
-//        }
+
     }
 
     // MARK: - Table view data source
@@ -154,16 +101,16 @@ class ListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.listArr.count
+        return self.listArray.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        print("List arr length: \(self.listArr.count)")
+        print("List arr length: \(self.listArray.count)")
         
         // Configure the cell...
-        cell.textLabel?.text = self.listArr[indexPath.row]
+        cell.textLabel?.text = self.listArray[indexPath.row].listName
         
 
         return cell
@@ -172,17 +119,13 @@ class ListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
-            // remove from database
+            // remove from firebase
             let ref = Database.database().reference()
             let userID = Auth.auth().currentUser?.uid
-            ref.child("/lists").child(userID!).child(self.keysArr[indexPath.row]).removeValue()
+            ref.child("/lists").child(userID!).child(self.listArray[indexPath.row].key!).removeValue()
             
-            
-            // remove from itemsArr
-            self.listArr.remove(at: indexPath.row)
-            
-            // remove from keysArr
-            self.keysArr.remove(at: indexPath.row)
+            // remove from local listArray
+            self.listArray.remove(at: indexPath.row)
 
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -203,10 +146,10 @@ class ListTableViewController: UITableViewController {
         if segue.identifier == "TodoSegue" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
 
-                print("passed var: \(self.listArr[indexPath.row])")
+                print("passed var: \(self.listArray[indexPath.row].listName)")
                 
                 let todoTableVC = segue.destination as? TodoTableViewController
-                todoTableVC?.navigationItem.title = self.listArr[indexPath.row]
+                todoTableVC?.navigationItem.title = self.listArray[indexPath.row].listName
             }
         }
     }

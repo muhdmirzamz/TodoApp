@@ -35,10 +35,26 @@ class InputListViewController: UIViewController {
                 return
             }
             
-            ref.child("/lists/\(userID)/\(key)").setValue(["listName": text])
+            let dateString = self.getStringForDateToday()
+            
+            let listDict: [String : Any] = [
+                "listName": text,
+                "timestamp": dateString
+            ]
+            
+            ref.child("/lists/\(userID)/\(key)").setValue(listDict)
             
             self.navigationController?.popViewController(animated: true)
         }
+    }
+    
+    func getStringForDateToday() -> String {
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.timeZone = TimeZone.autoupdatingCurrent
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.sss'Z'"
+
+        return dateFormatter.string(from: Date())
     }
 
     /*
