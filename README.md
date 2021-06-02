@@ -4,7 +4,7 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 ### Changelog
 
-2 June 2021:
+2 June 2021: testing
 - Lists now show up as the latest first on top
 - Refactored code by adding a class to hold list details
 
