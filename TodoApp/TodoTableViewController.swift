@@ -8,7 +8,13 @@
 
 import UIKit
 
+import FirebaseDatabase
+
 class TodoTableViewController: UITableViewController {
+    
+    var list: List?
+    
+    var todoArray: [Todo] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,28 +25,88 @@ class TodoTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // prevent double insertion to arrays everytime view loads up
+        print("Todo table View will appear")
+        
+
+        self.todoArray.removeAll()
+                
+        
+        let ref = Database.database().reference()
+        
+        guard let listID = list?.key else {
+            return
+        }
+        
+        
+        ref.child("/todos").child(listID).observeSingleEvent(of: .value) { (snapshot) in
+            
+            if let todosDict = snapshot.value as? Dictionary<String, Any> {
+                
+                for i in todosDict {
+                    
+                    let todo = Todo()
+                    
+                    todo.key = i.key
+                    
+                    
+                    if let todoDict = i.value as? Dictionary<String, Any> {
+                        
+                        guard let todoName = todoDict["name"] as? String else {
+                            return
+                        }
+                        
+                        todo.name = todoName
+                        
+                        
+                        guard let timestamp = todoDict["timestamp"] as? String else {
+                            return
+                        }
+                        
+                        
+                        todo.timestamp = timestamp
+                        
+                        
+                        self.todoArray.append(todo)
+                    }
+                }
+            }
+            
+            self.todoArray.sort(by: {$0.timestamp! > $1.timestamp!})
+            
+            self.tableView.reloadData()
+            
+        }
+
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.todoArray.count
     }
 
-    /*
+
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         // Configure the cell...
+        cell.textLabel?.text = self.todoArray[indexPath.row].name
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -77,14 +143,19 @@ class TodoTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "CreateTodoSegue" {
+            let createTodoVC = segue.destination as? CreateTodoViewController
+            createTodoVC?.list = list
+        }
     }
-    */
+    
 
 }

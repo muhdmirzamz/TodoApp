@@ -4,6 +4,11 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 ### Changelog
 
+3 June 2021:
+- You can add items to a list
+- Items show up latest first
+
+
 2 June 2021:
 - Lists now show up as the latest first on top
 - Refactored code by adding a class to hold list details

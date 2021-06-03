@@ -107,7 +107,7 @@ class ListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        print("List arr length: \(self.listArray.count)")
+//        print("List arr length: \(self.listArray.count)")
         
         // Configure the cell...
         cell.textLabel?.text = self.listArray[indexPath.row].listName
@@ -150,6 +150,7 @@ class ListTableViewController: UITableViewController {
                 
                 let todoTableVC = segue.destination as? TodoTableViewController
                 todoTableVC?.navigationItem.title = self.listArray[indexPath.row].listName
+                todoTableVC?.list = self.listArray[indexPath.row]
             }
         }
     }
