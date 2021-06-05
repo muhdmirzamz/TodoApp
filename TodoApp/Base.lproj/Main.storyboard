@@ -26,7 +26,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="zdn-3F-xid" kind="show" identifier="TodoSegue" id="OZO-ZJ-r4z"/>
+                                    <segue destination="Ipx-tO-QrP" kind="show" identifier="TodoSegue" id="KXW-D4-KbC"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -272,16 +272,90 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="fuh-7H-c5e">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ly2-66-aVO">
-                            <connections>
-                                <segue destination="gqt-eo-3Gx" kind="show" identifier="CreateTodoSegue" id="CgU-zI-dHq"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="ly2-66-aVO">
+                                <connections>
+                                    <segue destination="gqt-eo-3Gx" kind="show" identifier="CreateTodoSegue" id="CgU-zI-dHq"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="edit" id="KUE-Rf-HLJ">
+                                <connections>
+                                    <action selector="turnOnTableReordering" destination="zdn-3F-xid" id="zio-WP-9V8"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="ly2-66-aVO" id="8so-BX-XpO"/>
+                        <outlet property="editButton" destination="KUE-Rf-HLJ" id="aRH-q2-6Fv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cxe-N6-bZc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1793" y="131"/>
+        </scene>
+        <!--Todo View Controller-->
+        <scene sceneID="ICk-Yq-xCA">
+            <objects>
+                <viewController id="Ipx-tO-QrP" customClass="TodoViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ABI-xU-igG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="E96-Ri-Oas">
+                                <rect key="frame" x="0.0" y="128" width="414" height="768"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gvs-P2-aPF">
+                                <rect key="frame" x="0.0" y="88" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kbp-QE-25W">
+                                        <rect key="frame" x="350" y="7" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Sort"/>
+                                        <connections>
+                                            <action selector="sortTable" destination="Ipx-tO-QrP" eventType="touchUpInside" id="DgK-XR-QD9"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="iPS-d9-yI2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="E96-Ri-Oas" firstAttribute="centerX" secondItem="iPS-d9-yI2" secondAttribute="centerX" id="0aP-bL-WCU"/>
+                            <constraint firstItem="E96-Ri-Oas" firstAttribute="bottom" secondItem="iPS-d9-yI2" secondAttribute="bottom" constant="34" id="8jh-Vm-i7G"/>
+                            <constraint firstItem="E96-Ri-Oas" firstAttribute="top" secondItem="iPS-d9-yI2" secondAttribute="top" constant="40" id="Cpy-4b-K1B"/>
+                            <constraint firstItem="E96-Ri-Oas" firstAttribute="width" secondItem="ABI-xU-igG" secondAttribute="width" id="XAe-JN-mJ5"/>
+                            <constraint firstItem="E96-Ri-Oas" firstAttribute="leading" secondItem="iPS-d9-yI2" secondAttribute="leading" id="fKc-tC-FNe"/>
+                            <constraint firstItem="iPS-d9-yI2" firstAttribute="trailing" secondItem="E96-Ri-Oas" secondAttribute="trailing" id="o9e-8Y-kJN"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Z55-Td-Rf9">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="lbK-yg-DJk">
+                                <connections>
+                                    <segue destination="gqt-eo-3Gx" kind="show" identifier="CreateTodoSegue" id="CA9-hy-fLE"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" id="QSv-GK-Cd9">
+                                <connections>
+                                    <action selector="turnOnTableReordering" destination="Ipx-tO-QrP" id="gnO-9p-Dtb"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="lbK-yg-DJk" id="6dF-oT-7vT"/>
+                        <outlet property="editButton" destination="QSv-GK-Cd9" id="n96-jW-vHA"/>
+                        <outlet property="tableView" destination="E96-Ri-Oas" id="Q2K-Vw-BD7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4nR-Nn-zer" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1792.753623188406" y="890.625"/>
         </scene>
         <!--Create Todo View Controller-->
         <scene sceneID="gCk-S4-0Ck">
@@ -319,6 +393,9 @@
             <point key="canvasLocation" x="2843.4782608695655" y="140.625"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="CA9-hy-fLE"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

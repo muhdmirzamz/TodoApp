@@ -13,5 +13,6 @@ class Todo {
     var key: String?
     
     var name: String?
+    var order: Int?
     var timestamp: String?
 }

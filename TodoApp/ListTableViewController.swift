@@ -42,8 +42,6 @@ class ListTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         // prevent double insertion to arrays everytime view loads up
-        print("View will appear")
-        
 
         self.listArray.removeAll()
                 
@@ -148,9 +146,9 @@ class ListTableViewController: UITableViewController {
 
                 print("passed var: \(self.listArray[indexPath.row].listName)")
                 
-                let todoTableVC = segue.destination as? TodoTableViewController
-                todoTableVC?.navigationItem.title = self.listArray[indexPath.row].listName
-                todoTableVC?.list = self.listArray[indexPath.row]
+                let todoVC = segue.destination as? TodoViewController
+                todoVC?.navigationItem.title = self.listArray[indexPath.row].listName
+                todoVC?.list = self.listArray[indexPath.row]
             }
         }
     }

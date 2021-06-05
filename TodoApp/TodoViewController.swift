@@ -1,8 +1,8 @@
 //
-//  TodoTableViewController.swift
+//  TodoViewController.swift
 //  TodoApp
 //
-//  Created by Muhd Mirza on 3/4/21.
+//  Created by Muhd Mirza on 5/6/21.
 //  Copyright © 2021 Muhd Mirza. All rights reserved.
 //
 
@@ -10,24 +10,34 @@ import UIKit
 
 import FirebaseDatabase
 
-class TodoTableViewController: UITableViewController {
-    
+class TodoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     @IBOutlet var editButton: UIBarButtonItem!
     @IBOutlet var addButton: UIBarButtonItem!
+    
+    @IBOutlet var tableView: UITableView!
+    
     
     var list: List?
     
     var todoArray: [Todo] = []
+    
+    var isSortedToTimestamp = false
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // Do any additional setup after loading the view.
+        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        self.editButton.title = "Edit"
+        
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,7 +90,7 @@ class TodoTableViewController: UITableViewController {
                         
                         todo.timestamp = timestamp
                         
-                        
+
                         self.todoArray.append(todo)
                     }
                 }
@@ -93,23 +103,28 @@ class TodoTableViewController: UITableViewController {
         }
 
     }
-
+    
+    
+    
+    
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
+
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+
         return self.todoArray.count
     }
 
 
     
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         // Configure the cell...
@@ -118,29 +133,14 @@ class TodoTableViewController: UITableViewController {
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
+    
+    
+    
+    
+    
     
     @IBAction func turnOnTableReordering() {
+
         if self.tableView.isEditing == false {
             self.editButton.title = "Done"
             self.addButton.isEnabled = false
@@ -154,8 +154,22 @@ class TodoTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func sortTable() {
+        if self.isSortedToTimestamp == false {
+            self.todoArray.sort(by: {$0.timestamp! > $1.timestamp!})
+            
+            self.isSortedToTimestamp = true
+        } else {
+            self.todoArray.sort(by: {$0.order! < $1.order!})
+            
+            self.isSortedToTimestamp = false
+        }
+
+        self.tableView.reloadData()
+    }
+    
     // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         
         // update local array
         let object = self.todoArray[fromIndexPath.row]
@@ -192,17 +206,11 @@ class TodoTableViewController: UITableViewController {
         }
         
         self.tableView.reloadData()
+        
         ref.child("/todos/\(listID)").setValue(listDict)
     }
     
 
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     
     // MARK: - Navigation

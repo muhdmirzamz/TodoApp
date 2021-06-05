@@ -4,6 +4,11 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 ### Changelog
 
+5 June 2021:
+- Items are now ordered by order (You can move them around and it will remember the index)
+- Added a sort button to sort by timestamp
+- Fixed a bug that resets the timestamp when a new todo is created
+
 3 June 2021:
 - You can add items to a list
 - Items show up latest first

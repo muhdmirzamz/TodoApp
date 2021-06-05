@@ -16,11 +16,17 @@ class CreateTodoViewController: UIViewController {
     @IBOutlet var textfield: UITextField!
     
     var list: List?
+    
+    var todoArray: [Todo] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        for todo in self.todoArray {
+            print(todo.name!)
+        }
     }
     
 
@@ -37,15 +43,40 @@ class CreateTodoViewController: UIViewController {
                 return
             }
             
+            
             let dateString = self.getStringForDateToday()
             
-            let listDict: [String : Any] = [
-                "name": text,
-                "timestamp": dateString
+            
+            // the latest insert gets a 0 index so it will appear at the top
+            let listDict: NSMutableDictionary = [
+                key: [
+                    "name": text,
+                    "order": 0,
+                    "timestamp": dateString
+                ]
             ]
             
             
-            ref.child("/todos/\(listID)/\(key)").setValue(listDict)
+            var count = 1
+            
+            // pass in the array (should have been reordered correctly since the array has the auto reorder function)
+            // loop through the rest of the array to reorder the indexes
+            for todo in self.todoArray {
+                
+                let newDict: [String: Any] = [
+                    "name": todo.name!,
+                    "order": count,
+                    "timestamp": todo.timestamp
+                ]
+                
+                count += 1
+                
+                listDict.setValue(newDict, forKey: todo.key!)
+            }
+            
+
+            
+            ref.child("/todos/\(listID)").setValue(listDict)
             
             self.navigationController?.popViewController(animated: true)
         }
