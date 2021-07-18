@@ -2,7 +2,27 @@
 
 This is an iOS todo app with Firebase as a backend. This is used in conjunction with another [React web app](https://github.com/muhdmirzamz/TodoAppReact) I'm working on. Both of these projects connect to the same Firebase database.
 
+
+### Features
+
+**General:**
+- User login screen
+- User sign up screen
+- You can sign up as a user
+
+**Lists:**
+- You can retrieve lists
+- You can delete a list
+- You can add lists
+
+**Todos**
+- You can create todos
+
+
 ### Changelog
+
+18 July 2021:
+- You can now dismiss the keyboard by tapping on the screen after entering your login credentials
 
 5 June 2021:
 - Items are now ordered by order (You can move them around and it will remember the index)

@@ -19,8 +19,13 @@ class SigninViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let tapToHideKeyboard = UITapGestureRecognizer.init(target: self, action: #selector(SigninViewController.hideKeyboard))
+        self.view.addGestureRecognizer(tapToHideKeyboard)
     }
     
+    @objc func hideKeyboard() {
+        self.view.endEditing(true)
+    }
 
     @IBAction func signin() {
         
