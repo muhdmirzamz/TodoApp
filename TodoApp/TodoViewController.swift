@@ -156,14 +156,16 @@ class TodoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func sortTable() {
         print("Sorting")
-        
+                
         if self.isSortedToTimestamp == false {
-            self.todoArray.sort(by: {$0.timestamp! > $1.timestamp!})
-            
+            print("first")
+            self.todoArray.sort(by: {$0.timestamp! < $1.timestamp!})
+
             self.isSortedToTimestamp = true
         } else {
+            print("second")
             self.todoArray.sort(by: {$0.order! < $1.order!})
-            
+
             self.isSortedToTimestamp = false
         }
 

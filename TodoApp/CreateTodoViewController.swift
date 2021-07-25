@@ -23,10 +23,6 @@ class CreateTodoViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        for todo in self.todoArray {
-            print(todo.name!)
-        }
     }
     
 

@@ -17,9 +17,12 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 **Todos**
 - You can create todos
-
+- You can sort todos according to timestamp now
 
 ### Changelog
+
+25 July 2021:
+- Fixed: You can sort todos according to timestamp now
 
 18 July 2021:
 - You can now dismiss the keyboard by tapping on the screen after entering your login credentials

@@ -248,52 +248,6 @@
             </objects>
             <point key="canvasLocation" x="102.89855072463769" y="130.58035714285714"/>
         </scene>
-        <!--Todo Table View Controller-->
-        <scene sceneID="PhG-ZQ-o4e">
-            <objects>
-                <tableViewController id="zdn-3F-xid" customClass="TodoTableViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="U2z-gT-Eu0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="QZO-Ik-Fmd">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QZO-Ik-Fmd" id="gdn-89-13L">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="zdn-3F-xid" id="aYA-M8-sKQ"/>
-                            <outlet property="delegate" destination="zdn-3F-xid" id="7WL-gD-6mf"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="fuh-7H-c5e">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="ly2-66-aVO">
-                                <connections>
-                                    <segue destination="gqt-eo-3Gx" kind="show" identifier="CreateTodoSegue" id="CgU-zI-dHq"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="edit" id="KUE-Rf-HLJ">
-                                <connections>
-                                    <action selector="turnOnTableReordering" destination="zdn-3F-xid" id="zio-WP-9V8"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="addButton" destination="ly2-66-aVO" id="8so-BX-XpO"/>
-                        <outlet property="editButton" destination="KUE-Rf-HLJ" id="aRH-q2-6Fv"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cxe-N6-bZc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1793" y="131"/>
-        </scene>
         <!--Todo View Controller-->
         <scene sceneID="ICk-Yq-xCA">
             <objects>
@@ -355,7 +309,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4nR-Nn-zer" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1792.753623188406" y="890.625"/>
+            <point key="canvasLocation" x="1912" y="141"/>
         </scene>
         <!--Create Todo View Controller-->
         <scene sceneID="gCk-S4-0Ck">
@@ -393,9 +347,6 @@
             <point key="canvasLocation" x="2843.4782608695655" y="140.625"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="CA9-hy-fLE"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
