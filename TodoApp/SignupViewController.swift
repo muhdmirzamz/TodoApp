@@ -35,7 +35,7 @@ class SignupViewController: UIViewController {
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let result = result {
                 print(result.user.uid)
-                print(result.user.email)
+                print(result.user.email!)
                 
                 let alert = UIAlertController.init(title: "Great!", message: "Sign up successful", preferredStyle: .alert)
                 let okAction = UIAlertAction.init(title: "OK", style: .default) { (action) in

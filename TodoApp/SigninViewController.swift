@@ -10,7 +10,7 @@ import UIKit
 
 import FirebaseAuth
 
-class SigninViewController: UIViewController {
+class SigninViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var emailTextfield: UITextField!
     @IBOutlet var passwordTextfield: UITextField!
@@ -21,8 +21,16 @@ class SigninViewController: UIViewController {
         // Do any additional setup after loading the view.
         let tapToHideKeyboard = UITapGestureRecognizer.init(target: self, action: #selector(SigninViewController.hideKeyboard))
         self.view.addGestureRecognizer(tapToHideKeyboard)
+        
+        self.emailTextfield.delegate = self
+        self.passwordTextfield.delegate = self
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+    }
+    
+    // @objc tag when we use #selector
     @objc func hideKeyboard() {
         self.view.endEditing(true)
     }
@@ -41,7 +49,7 @@ class SigninViewController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
             if let result = result {
                 print(result.user.uid)
-                print(result.user.email)
+                print(result.user.email!)
                 
                 DispatchQueue.main.async {
                     let navController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(identifier: "NavigationController") as? UINavigationController

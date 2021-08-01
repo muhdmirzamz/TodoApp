@@ -21,6 +21,9 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 ### Changelog
 
+1 August 2021:
+- Keyboard in the Login screen can be dismissed when hitting the Return key
+
 25 July 2021:
 - Fixed: You can sort todos according to timestamp now
 
