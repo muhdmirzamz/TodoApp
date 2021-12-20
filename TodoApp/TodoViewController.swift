@@ -9,6 +9,7 @@
 import UIKit
 
 import FirebaseDatabase
+import FirebaseAuth
 
 class TodoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -212,6 +213,33 @@ class TodoViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.tableView.reloadData()
         
         ref.child("/todos/\(listID)").setValue(listDict)
+    }
+    
+    
+    
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            // remove from firebase
+            let ref = Database.database().reference()
+            
+            print("Key to be deleted: \(self.todoArray[indexPath.row].key!)")
+            
+            guard let listID = list?.key else {
+                return
+            }
+            
+            ref.child("/todos").child(listID).child(self.todoArray[indexPath.row].key!).removeValue()
+            
+            // remove from local listArray
+            self.todoArray.remove(at: indexPath.row)
+
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            print("Deleting todo")
+        }
     }
     
 
