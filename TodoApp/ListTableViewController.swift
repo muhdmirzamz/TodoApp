@@ -120,11 +120,21 @@ class ListTableViewController: UITableViewController {
             // remove from firebase
             let ref = Database.database().reference()
             let userID = Auth.auth().currentUser?.uid
-            ref.child("/lists").child(userID!).child(self.listArray[indexPath.row].key!).removeValue()
             
-            // remove from local listArray
+            let listID = self.listArray[indexPath.row].key!
+            
+            // remove todos first
+            ref.child("/todos").child(listID).removeValue()
+            // remove list next
+            ref.child("/lists").child(userID!).child(listID).removeValue()
+            
+            
+            // remove list from local listArray
+            // we remove from local array afterwards and not before
+            // because we are referencing listID, which is in listArray
             self.listArray.remove(at: indexPath.row)
 
+            // remove from table view next
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
