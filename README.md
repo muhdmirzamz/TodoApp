@@ -21,6 +21,12 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 ### Changelog
 
+21 December 2021:
+- Deleting a list now deletes all todo items in said list
+
+20 December 2021:
+- Fixed: You can now delete a todo item by pressing "Edit" button and deleting it
+
 1 August 2021:
 - Keyboard in the Login screen can be dismissed when hitting the Return key
 
