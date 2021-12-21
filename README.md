@@ -21,6 +21,9 @@ This is an iOS todo app with Firebase as a backend. This is used in conjunction 
 
 ### Changelog
 
+22 December 2021:
+- You can now dismiss the keyboard in all the views by tapping the "Return" key or the view itself
+
 21 December 2021:
 - Deleting a list now deletes all todo items in said list
 

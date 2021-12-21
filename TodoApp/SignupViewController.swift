@@ -10,7 +10,7 @@ import UIKit
 
 import FirebaseAuth
 
-class SignupViewController: UIViewController {
+class SignupViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var emailTextfield: UITextField!
     @IBOutlet var passwordTextfield: UITextField!
@@ -19,6 +19,20 @@ class SignupViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(SignupViewController.hideKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
+        
+        self.emailTextfield.delegate = self
+        self.passwordTextfield.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+    }
+    
+    @objc func hideKeyboard() {
+        self.view.endEditing(true)
     }
     
     @IBAction func signup() {

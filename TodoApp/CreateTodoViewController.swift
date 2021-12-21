@@ -11,7 +11,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
-class CreateTodoViewController: UIViewController {
+class CreateTodoViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var textfield: UITextField!
     
@@ -23,8 +23,21 @@ class CreateTodoViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(CreateTodoViewController.hideKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
+        
+        self.textfield.delegate = self
+        
     }
     
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+    }
+    
+    @objc func hideKeyboard() {
+        self.view.endEditing(true)
+    }
 
     @IBAction func addTodo() {
         if let text = self.textfield.text {

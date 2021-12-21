@@ -12,7 +12,7 @@ import FirebaseDatabase
 import FirebaseAuth
 
 
-class InputListViewController: UIViewController {
+class InputListViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var textfield: UITextField!
     
@@ -20,7 +20,21 @@ class InputListViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+
+        let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(InputListViewController.hideKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
+        
+        self.textfield.delegate = self
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+    }
+    
+    @objc func hideKeyboard() {
+        self.view.endEditing(true)
+    }
+
     
     @IBAction func addItem() {
         if let text = self.textfield.text {
