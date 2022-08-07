@@ -1,5 +1,9 @@
 ## Todo App
 
+<img src="https://github.com/AudioKit/Cookbook/raw/main/Cookbook/Cookbook/Assets.xcassets/audiokit-icon.imageset/audiokit-icon.png" width="20%"/>
+
+![alt text](./resources/login_page.png)
+
 This is an iOS todo app with Firebase as a backend. This is used in conjunction with another [React web app](https://github.com/muhdmirzamz/TodoAppReact) I'm working on. Both of these projects connect to the same Firebase database.
 
 
